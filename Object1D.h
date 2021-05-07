@@ -12,7 +12,7 @@ public:
     //##ModelId=45F4D79701BA
     virtual ~Object1D();            // object1D destructor
     //##ModelId=45F4D79701C7
-    virtual void Draw(int shaderID);            // display object1D
+    virtual void Draw(int shaderID, glm::mat4 worldMatrix);            // display object1D
 //    virtual void FindClosestPoint(void);
 
 private:

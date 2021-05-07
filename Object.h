@@ -61,7 +61,7 @@ public:
     virtual void Update(float, bool = false, float = 0, float = 0);            //update the object about forces, velocity, position
     
     //##ModelId=45F4D7970284
-    virtual void Draw(int) = 0;                    // display the object
+    virtual void Draw(int, glm::mat4) = 0;                    // display the object
     //##ModelId=45F4D7970286
     virtual void FindClosestPoint(void) ;            // find the closet particle on th outer layer to mouse position
 

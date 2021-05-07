@@ -26,7 +26,7 @@ public:
     virtual ~Object2D();                        // destructor object2D
 
     //##ModelId=45F4D797017A
-    virtual void Draw(int shaderID);                        // display the object 2D
+    virtual void Draw(int shaderID, glm::mat4 worldMatrix);                        // display the object 2D
     //##ModelId=45F4D797017C
     inline void setPressure(float pre){pressure = pre;}    // Set Pressure
     //##ModelId=45F4D797017E

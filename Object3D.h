@@ -38,7 +38,7 @@ public:
 public:
 
     //##ModelId=45F4D79700FD
-    virtual void Draw(int);
+    virtual void Draw(int, glm::mat4 worldMatrix);
     //##ModelId=45F4D79700FF
     void Iteration();
     //##ModelId=45F4D7970100

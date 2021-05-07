@@ -848,7 +848,7 @@ void Object3D::Pyramid3()
 //================================================================================
 
 //##ModelId=45F4D79700FD
-void Object3D::Draw(int shaderID)
+void Object3D::Draw(int shaderID, glm::mat4 worldMatrix)
 {
     
 
@@ -886,7 +886,7 @@ void Object3D::Draw(int shaderID)
     updateVertexArray();
     glBindVertexArray(VAO);
     // set world matrix
-    glUniformMatrix4fv(glGetUniformLocation(shaderID, "worldMatrix"), 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(shaderID, "worldMatrix"), 1, GL_FALSE, &worldMatrix[0][0]);
     // get color location
     GLuint ColorLocation = glGetUniformLocation(shaderID, "colorChoice");
     glEnableClientState(GL_VERTEX_ARRAY);

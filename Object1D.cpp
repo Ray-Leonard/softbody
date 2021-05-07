@@ -50,7 +50,7 @@ void Object1D::updateVertexArray(){
 }
 
 //##ModelId=45F4D79701C7
-void Object1D::Draw(int shaderID)
+void Object1D::Draw(int shaderID, glm::mat4 worldMatrix)
 {
     static bool findOnce = false;
     
@@ -62,10 +62,10 @@ void Object1D::Draw(int shaderID)
     glBindVertexArray(VAO);
 //    glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // set world matrix
-    glUniformMatrix4fv(glGetUniformLocation(shaderID, "worldMatrix"), 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(shaderID, "worldMatrix"), 1, GL_FALSE, &worldMatrix[0][0]);
     // get color location
     GLuint ColorLocation = glGetUniformLocation(shaderID, "colorChoice");
-    glDisable(GL_CULL_FACE);
+//    glDisable(GL_CULL_FACE);
     // set color and draw
     // draw line
     glEnableClientState(GL_VERTEX_ARRAY);

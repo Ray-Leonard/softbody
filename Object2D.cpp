@@ -69,37 +69,37 @@ void Object2D::updateVertexArray(){
     // push in inner polygon data
     for(int i = 0; i < inner_points.size(); ++i)
     {
-        tempVertices.push_back(glm::vec3(inner_points[i]->r->x, inner_points[i]->r->y, 0.0f));
+        tempVertices.push_back(glm::vec3(inner_points[i]->r->x, inner_points[i]->r->y, 0.01f));
     }
     
     // push in outer spring data
     for(int i = 0; i < outer_springs.size(); ++i){
-        tempVertices.push_back(glm::vec3(outer_springs[i]->sp1->r->x,outer_springs[i]->sp1->r->y, 0.0f));
-        tempVertices.push_back(glm::vec3(outer_springs[i]->sp2->r->x,outer_springs[i]->sp2->r->y, 0.0f));
+        tempVertices.push_back(glm::vec3(outer_springs[i]->sp1->r->x,outer_springs[i]->sp1->r->y, 0.01f));
+        tempVertices.push_back(glm::vec3(outer_springs[i]->sp2->r->x,outer_springs[i]->sp2->r->y, 0.01f));
     }
     
     // push in inner spring data
     for(int i = 0; i < inner_springs.size(); ++i){
-        tempVertices.push_back(glm::vec3(inner_springs[i]->sp1->r->x,inner_springs[i]->sp1->r->y, 0.0f));
-        tempVertices.push_back(glm::vec3(inner_springs[i]->sp2->r->x,inner_springs[i]->sp2->r->y, 0.0f));
+        tempVertices.push_back(glm::vec3(inner_springs[i]->sp1->r->x,inner_springs[i]->sp1->r->y, 0.01f));
+        tempVertices.push_back(glm::vec3(inner_springs[i]->sp2->r->x,inner_springs[i]->sp2->r->y, 0.01f));
     }
     
     // push in radium spring data
     for(int i = 0; i < radium_springs.size(); ++i){
-        tempVertices.push_back(glm::vec3(radium_springs[i]->sp1->r->x,radium_springs[i]->sp1->r->y, 0.0f));
-        tempVertices.push_back(glm::vec3(radium_springs[i]->sp2->r->x,radium_springs[i]->sp2->r->y, 0.0f));
+        tempVertices.push_back(glm::vec3(radium_springs[i]->sp1->r->x,radium_springs[i]->sp1->r->y, 0.01f));
+        tempVertices.push_back(glm::vec3(radium_springs[i]->sp2->r->x,radium_springs[i]->sp2->r->y, 0.01f));
     }
     
     // push in shear spring left data
     for(int i = 0; i < shear_springs_left.size(); ++i){
-        tempVertices.push_back(glm::vec3(shear_springs_left[i]->sp1->r->x,shear_springs_left[i]->sp1->r->y, 0.0f));
-        tempVertices.push_back(glm::vec3(shear_springs_left[i]->sp2->r->x,shear_springs_left[i]->sp2->r->y, 0.0f));
+        tempVertices.push_back(glm::vec3(shear_springs_left[i]->sp1->r->x,shear_springs_left[i]->sp1->r->y, 0.01f));
+        tempVertices.push_back(glm::vec3(shear_springs_left[i]->sp2->r->x,shear_springs_left[i]->sp2->r->y, 0.01f));
     }
     
     // push in shear spring right data
     for(int i = 0; i < shear_springs_right.size(); ++i){
-        tempVertices.push_back(glm::vec3(shear_springs_right[i]->sp1->r->x,shear_springs_right[i]->sp1->r->y, 0.0f));
-        tempVertices.push_back(glm::vec3(shear_springs_right[i]->sp2->r->x,shear_springs_right[i]->sp2->r->y, 0.0f));
+        tempVertices.push_back(glm::vec3(shear_springs_right[i]->sp1->r->x,shear_springs_right[i]->sp1->r->y, 0.01f));
+        tempVertices.push_back(glm::vec3(shear_springs_right[i]->sp2->r->x,shear_springs_right[i]->sp2->r->y, 0.01f));
     }
     
     // push in integrator line data
@@ -203,21 +203,16 @@ int Object2D::getCount(drawing_instances instance){
 }
 
 //##ModelId=45F4D797017A
-void Object2D::Draw(int shaderID)
+void Object2D::Draw(int shaderID, glm::mat4 worldMatrix)
 {
     static bool findOnce = false;
-    //because of the drawing method, two circles are on the same plane, cross each other with depth buffer
-//    glDisable(GL_DEPTH_TEST);
-//    glDisable(GL_CULL_FACE);
-    
-//    int i;
     
     //  ===============  basic settings for ogl3 drawing
     updateVertexArray();
     glBindVertexArray(VAO);
 //    glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // set world matrix
-    glUniformMatrix4fv(glGetUniformLocation(shaderID, "worldMatrix"), 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(shaderID, "worldMatrix"), 1, GL_FALSE, &worldMatrix[0][0]);
     // get color location
     GLuint ColorLocation = glGetUniformLocation(shaderID, "colorChoice");
     glEnableClientState(GL_VERTEX_ARRAY);
